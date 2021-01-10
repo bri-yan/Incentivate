@@ -2,7 +2,7 @@
     <string name="app_name">Incentivate</string>
     <string name="title_home">Home</string>
     <string name="title_goals">Goals</string>
-    <string name="title_leaderboard">Notifications</string>
+    <string name="title_leaderboard">Leaderboard</string>
     <string name="title_activity_walk_module">Map</string>
     <string name="goes_to_add_product">Goes to Add Product</string>
     <string name="title_activity_add_goal">AddGoalActivity</string>
