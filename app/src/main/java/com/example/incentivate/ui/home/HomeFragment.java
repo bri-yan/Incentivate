@@ -1,9 +1,11 @@
 package com.example.incentivate.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.incentivate.CreateAccountActivity;
 import com.example.incentivate.R;
 
 import org.w3c.dom.Text;
@@ -49,9 +52,11 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
+
+    private int stepProgressStatus = 0;
+    private TextView mGoalText;
     private HomeViewModel homeViewModel;
-    User user = new User("BriYan");
-    TextView name;
+    TextView name, status;
     TextView goal;
     BarChart stepChart;
     private ProgressBar stepBar;
@@ -66,36 +71,47 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        String userName = mPreferences.getString(getString(R.string.name),"");
+        System.out.println("Name: " + userName);
+        User user = new User(userName);
+
         name = (TextView)root.findViewById(R.id.user_Name);
+        status = root.findViewById(R.id.status);
         goal = root.findViewById(R.id.user_Goal);
+
         name.setText(user.getName());
-       // goal.setText(userGoal.getGoal());
+
+        goal.setText("Goal: 10,000 steps every day for 1 month!");
 
 
         //Progress Bar
 
-        /*
         stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (currentSteps < goalSteps) {
+                while (stepProgressStatus < 10000) {
+                    stepProgressStatus++;
+                    android.os.SystemClock.sleep(1500);
+                    status.setText(String.valueOf(stepProgressStatus));
                     stepHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            stepBar.setProgress(currentSteps);
+                            stepBar.setProgress(stepProgressStatus);
                         }
                     });
                 }
+                stepHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mGoalText.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         }).start();
 
 
-         */
-
-
-
-/*
         //Bar graph
         float barWidth = 0.3f;
         float barSpace = 0.2f;
@@ -114,17 +130,13 @@ public class HomeFragment extends Fragment {
 
         ArrayList<BarEntry> stepEntries = new ArrayList<>();
 
-        stepEntries.add(new BarEntry(1,(float)  ));
-        stepEntries.add(new BarEntry(2,(float)  ));
-        stepEntries.add(new BarEntry(3,(float)  ));
-        stepEntries.add(new BarEntry(4,(float)  ));
-        stepEntries.add(new BarEntry(5,(float)  ));
-        stepEntries.add(new BarEntry(6,(float)  ));
-        stepEntries.add(new BarEntry(7,(float)  ));
-
-
-
-
+        stepEntries.add(new BarEntry(1,(float)8135));
+        stepEntries.add(new BarEntry(2,(float)3423));
+        stepEntries.add(new BarEntry(3,(float)9123));
+        stepEntries.add(new BarEntry(4,(float)2647));
+        stepEntries.add(new BarEntry(5,(float)2374));
+        stepEntries.add(new BarEntry(6,(float)3647));
+        stepEntries.add(new BarEntry(7,(float)1245));
 
 
         BarDataSet stepSet= new BarDataSet(stepEntries, "Dates");
@@ -136,6 +148,7 @@ public class HomeFragment extends Fragment {
         LocalDate day5 = day1.minusDays(4);
         LocalDate day6 = day1.minusDays(5);
         LocalDate day7 = day1.minusDays(6);
+
         ArrayList<String> dates = new ArrayList<>();
         dates.add(day1.toString());
         dates.add(day2.toString());
@@ -149,16 +162,21 @@ public class HomeFragment extends Fragment {
         stepSets.add(stepSet);
 
         BarData stepData = new BarData(stepSets);
+
         stepData.setValueFormatter(new LargeValueFormatter());
 
         stepChart.setData(stepData);
-        stepChart.getBarData().setBarWidth(barWidth);
+
+        /*
         stepChart.getBarData().setBarWidth(barWidth);
         stepChart.getXAxis().setAxisMinimum(0);
         stepChart.getXAxis().setAxisMaximum(0 + stepChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
         stepChart.groupBars(0, groupSpace, barSpace);
         stepChart.getData().setHighlightEnabled(false);
         stepChart.invalidate();
+
+         */
+
 
         //X-axis
         XAxis xAxis = stepChart.getXAxis();
@@ -169,6 +187,8 @@ public class HomeFragment extends Fragment {
         xAxis.setAxisMaximum(6);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
+
+        /*
         //Y-axis
         stepChart.getAxisRight().setEnabled(false);
         YAxis leftAxis = stepChart.getAxisLeft();
@@ -177,7 +197,11 @@ public class HomeFragment extends Fragment {
         leftAxis.setSpaceTop(35f);
         leftAxis.setAxisMinimum(0f);
 
- */
+         */
+
+
+
+
 
         return root;
     }

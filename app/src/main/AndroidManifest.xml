@@ -30,7 +30,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.activity.ExerciseList" />
+        <activity android:name=".ui.community.ExerciseList" />
         <activity
             android:name=".AddGoalActivity"
             android:label="@string/title_activity_add_goal"
