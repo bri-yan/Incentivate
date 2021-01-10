@@ -54,7 +54,7 @@ import androidx.fragment.app.Fragment;
 public class HomeFragment extends Fragment {
 
 
-    private int stepProgressStatus = 0;
+    private int stepProgressStatus = 67;
     private TextView mGoalText;
     private HomeViewModel homeViewModel;
     TextView name, status;
@@ -85,16 +85,48 @@ public class HomeFragment extends Fragment {
 
         goal.setText("Goal: 10,000 steps every day for 1 month!");
 
+        stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
 
         //Progress Bar
 
-        stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
+        //Constant
         stepBar.setProgress(stepProgressStatus);
 
+        status.setText(String.valueOf(stepProgressStatus) + "%");
+
+        //Adder
+        /*
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (stepProgressStatus < 10000) {
+                    stepProgressStatus++;
+                    android.os.SystemClock.sleep(1500);
+                    status.setText(String.valueOf(stepProgressStatus));
+                    stepHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            stepBar.setProgress(stepProgressStatus);
+                        }
+                    });
+                }
+                stepHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mGoalText.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+
+         */
+
+
         //Bar graph
-        float barWidth = 0.3f;
-        float barSpace = 0.2f;
-        float groupSpace = 0.4f;
+        float barWidth = 0.8f;
+        float barSpace = 0.5f;
+        float groupSpace = 0.1f;
 
         stepChart = (BarChart) root.findViewById(R.id.bargraph);
 
@@ -148,15 +180,18 @@ public class HomeFragment extends Fragment {
 
         stepChart.setData(stepData);
 
-        /*
+
         stepChart.getBarData().setBarWidth(barWidth);
         stepChart.getXAxis().setAxisMinimum(0);
         stepChart.getXAxis().setAxisMaximum(0 + stepChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
-        stepChart.groupBars(0, groupSpace, barSpace);
+        //stepChart.groupBars(0, groupSpace, barSpace);
         stepChart.getData().setHighlightEnabled(false);
         stepChart.invalidate();
 
-         */
+
+        stepChart.animateY(1000);
+
+
 
 
         //X-axis
@@ -169,9 +204,10 @@ public class HomeFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
 
-        /*
+
         //Y-axis
         stepChart.getAxisRight().setEnabled(false);
+        /*
         YAxis leftAxis = stepChart.getAxisLeft();
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setDrawGridLines(true);
