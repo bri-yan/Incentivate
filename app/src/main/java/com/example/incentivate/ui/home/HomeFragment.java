@@ -44,6 +44,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -88,29 +89,7 @@ public class HomeFragment extends Fragment {
         //Progress Bar
 
         stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (stepProgressStatus < 10000) {
-                    stepProgressStatus++;
-                    android.os.SystemClock.sleep(1500);
-                    status.setText(String.valueOf(stepProgressStatus));
-                    stepHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            stepBar.setProgress(stepProgressStatus);
-                        }
-                    });
-                }
-                stepHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mGoalText.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
-        }).start();
-
+        stepBar.setProgress(stepProgressStatus);
 
         //Bar graph
         float barWidth = 0.3f;
@@ -149,14 +128,16 @@ public class HomeFragment extends Fragment {
         LocalDate day6 = day1.minusDays(5);
         LocalDate day7 = day1.minusDays(6);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE");
+
         ArrayList<String> dates = new ArrayList<>();
-        dates.add(day1.toString());
-        dates.add(day2.toString());
-        dates.add(day3.toString());
-        dates.add(day4.toString());
-        dates.add(day5.toString());
-        dates.add(day6.toString());
-        dates.add(day7.toString());
+        dates.add(day1.format(formatter));
+        dates.add(day2.format(formatter));
+        dates.add(day3.format(formatter));
+        dates.add(day4.format(formatter));
+        dates.add(day5.format(formatter));
+        dates.add(day6.format(formatter));
+        dates.add(day7.format(formatter));
 
         ArrayList<IBarDataSet> stepSets = new ArrayList<>();
         stepSets.add(stepSet);

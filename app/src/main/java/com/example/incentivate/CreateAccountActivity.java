@@ -41,7 +41,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             Button confirm = (Button) findViewById(R.id.button2);
 
-            mName = (EditText) findViewById(R.id.name);
+            mName = (EditText) findViewById(R.id.activityName);
             mEmail = (EditText) findViewById(R.id.email);
             mCardNumber = (EditText) findViewById(R.id.cardNumber);
             mExpiryDate = (EditText) findViewById(R.id.expiryDate);
