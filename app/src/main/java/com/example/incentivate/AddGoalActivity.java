@@ -1,5 +1,6 @@
 package com.example.incentivate;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,6 +28,9 @@ public class AddGoalActivity extends AppCompatActivity implements AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        Button button = findViewById(R.id.submitButton);
+        button.setOnClickListener(this::goHome);
     }
 
     @Override
@@ -37,5 +42,10 @@ public class AddGoalActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void goHome(View v) {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

@@ -9,7 +9,7 @@
     tools:context=".AddGoalActivity">
 
     <Button
-        android:id="@+id/sumbitButton"
+        android:id="@+id/submitButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
