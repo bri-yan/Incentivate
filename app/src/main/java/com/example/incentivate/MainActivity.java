@@ -53,10 +53,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         FloatingActionButton button = findViewById(R.id.goToAddGoal);
         button.setOnClickListener(this::launchAddGoalActivity);
 
-        stepToday = findViewById(R.id.steps_taken_today);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        stepToday.setText("6");
+
         //startCounter();
     }
 

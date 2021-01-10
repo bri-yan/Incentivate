@@ -1,4 +1,4 @@
-package com.example.incentivate.ui.activity;
+package com.example.incentivate.ui.community;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
