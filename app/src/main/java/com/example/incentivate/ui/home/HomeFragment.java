@@ -1,9 +1,11 @@
 package com.example.incentivate.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +51,8 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
+
     private HomeViewModel homeViewModel;
-    User user = new User("BriYan");
     TextView name;
     TextView goal;
     BarChart stepChart;
@@ -65,6 +67,10 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        String userName = mPreferences.getString("name","");
+        User user = new User(userName);
 
         name = (TextView)root.findViewById(R.id.user_Name);
         goal = root.findViewById(R.id.user_Goal);

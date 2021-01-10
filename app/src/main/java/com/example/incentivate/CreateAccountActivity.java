@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +12,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.SQLOutput;
+
 public class CreateAccountActivity extends AppCompatActivity {
-    //private EditText mloggedIn;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
+    boolean loggedIn;
 
     private EditText mName, mEmail, mCardNumber, mExpiryDate;
 
@@ -24,45 +27,59 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
 
-        Button confirm = (Button) findViewById(R.id.button2);
-
-        mName = (EditText)findViewById(R.id.name);
-        mEmail = (EditText)findViewById(R.id.email);
-        mCardNumber = (EditText)findViewById(R.id.cardNumber);
-        mExpiryDate = (EditText)findViewById(R.id.expiryDate);
-
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mPreferences.edit();
 
-        confirm.setOnClickListener(this::goHome);
-        /*
-        confirm.setOnClickListener(new View.OnClickListener() {
+        loggedIn = mPreferences.getBoolean("loGGedIN",false);
 
-            @Override
-            public void onClick(View v) {
-                mEditor.putString(getString(R.string.loggedIn), "True");
-                mEditor.apply();
+        System.out.println("loggedIn: " + loggedIn);
 
-                String name = mName.getText().toString();
-                mEditor.putString(getString(R.string.name), name);
-                mEditor.commit();
+        if (loggedIn) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+        else {
 
-                String email = mEmail.getText().toString();
-                mEditor.putString(getString(R.string.email), email);
-                mEditor.commit();
+            Button confirm = (Button) findViewById(R.id.button2);
 
-                String cardNumber = mCardNumber.getText().toString();
-                mEditor.putString(getString(R.string.cardNum), cardNumber);
-                mEditor.commit();
+            mName = (EditText) findViewById(R.id.name);
+            mEmail = (EditText) findViewById(R.id.email);
+            mCardNumber = (EditText) findViewById(R.id.cardNumber);
+            mExpiryDate = (EditText) findViewById(R.id.expiryDate);
 
-                String expiryDate = mExpiryDate.getText().toString();
-                mEditor.putString(getString(R.string.expDate), expiryDate);
-                mEditor.commit();
+            mEditor = mPreferences.edit();
 
-                goHome(v);
-            }
-        });
-             */
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loggedIn = true;
+                    mEditor.putBoolean("loggedIN", loggedIn);
+                    mEditor.apply();
+                    System.out.println("SAVED: " + loggedIn);
+
+                    String name = mName.getText().toString();
+                    mEditor.putString(getString(R.string.name), name);
+                    mEditor.commit();
+                    System.out.println("SAVED: " + name);
+
+                    String email = mEmail.getText().toString();
+                    mEditor.putString(getString(R.string.email), email);
+                    mEditor.commit();
+                    System.out.println("SAVED: " + email);
+
+                    String cardNumber = mCardNumber.getText().toString();
+                    mEditor.putString(getString(R.string.cardNum), cardNumber);
+                    mEditor.commit();
+                    System.out.println("SAVED: " + cardNumber);
+
+                    String expiryDate = mExpiryDate.getText().toString();
+                    mEditor.putString(getString(R.string.expDate), expiryDate);
+                    mEditor.commit();
+                    System.out.println("SAVED: " + expiryDate);
+
+                    goHome(v);
+                }
+            });
+        }
     }
 
     public void goHome(View v) {
@@ -72,7 +89,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     /*
     private void checkSharedPreferences() {
-        String loggedIn = mPreferences.getString(getString(R.string.loggedIn),"False");
         String name = mPreferences.getString(getString(R.string.name),"");
         String email = mPreferences.getString(getString(R.string.name),"");
         String cardNum = mPreferences.getString(getString(R.string.cardNum),"");
@@ -82,7 +98,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         mEmail.setText(email);
         mCardNumber.setText(cardNum);
         mExpiryDate.setText(expDate);
-        mloggedIn.setText(loggedIn);
     }
 
      */
