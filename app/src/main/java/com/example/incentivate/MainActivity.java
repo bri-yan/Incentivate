@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(stepSensor != null){
             sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI);
         }else{
-            Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
         }
     }
 

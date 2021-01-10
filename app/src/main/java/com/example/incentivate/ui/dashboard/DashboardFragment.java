@@ -38,13 +38,13 @@ public class DashboardFragment extends Fragment {
         workoutIcon = root.findViewById(R.id.workout_icon);
         noGoals = root.findViewById(R.id.no_goals);
 
-/*        if(Goal.goals==null||Goal.goals.size()<=0){
+        if(Goal.goals==null||Goal.goals.size()<=0){
             workoutIcon.setVisibility(View.VISIBLE);
             noGoals.setVisibility(View.VISIBLE);
         }else{
             workoutIcon.setVisibility(View.INVISIBLE);
             noGoals.setVisibility(View.INVISIBLE);
-        }*/
+        }
 
         recyclerView = root.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getActivity());
