@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/activityName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -56,60 +56,67 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="24dp"
+        android:cursorVisible="false"
         android:ems="10"
-        android:hint="Date"
+        android:focusableInTouchMode="false"
+        android:hint="Start date"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timeText"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/activityName" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/dateText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:cursorVisible="false"
         android:ems="10"
-        android:hint="Deposit amount"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
-
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:hint="Start"
-        android:inputType="time"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTime2"
+        android:focusableInTouchMode="false"
+        android:hint="End Date"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/timeText1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <EditText
-        android:id="@+id/editTextTime2"
+        android:id="@+id/timeText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:ems="10"
-        android:hint="End"
+        android:hint="Start time"
         android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+        android:cursorVisible="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="@+id/dateText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editTextTime" />
+        app:layout_constraintStart_toEndOf="@+id/dateText" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/timeText1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:ems="10"
+        android:hint="End time"
+        android:inputType="time"
+        android:cursorVisible="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="@+id/dateText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dateText2" />
+
+    <EditText
+        android:id="@+id/goal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -120,7 +127,7 @@
         app:layout_constraintEnd_toStartOf="@+id/spinner2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/dateText2" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -128,13 +135,13 @@
         android:layout_height="44dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber2"
+        app:layout_constraintBottom_toBottomOf="@+id/goal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editTextNumber2" />
+        app:layout_constraintStart_toEndOf="@+id/goal" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/notes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -146,6 +153,20 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/deposit" />
+
+    <EditText
+        android:id="@+id/deposit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:ems="10"
+        android:hint="Deposit"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

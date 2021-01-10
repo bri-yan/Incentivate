@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.945" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/activityName"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/activityName" />
 
     <EditText
         android:id="@+id/cardNumber"
@@ -85,7 +85,7 @@
         android:layout_height="45dp"
         android:text="Personal Information"
         android:textSize="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintBottom_toTopOf="@+id/activityName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.641"
         app:layout_constraintStart_toStartOf="parent"
