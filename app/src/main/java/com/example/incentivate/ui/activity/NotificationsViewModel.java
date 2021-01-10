@@ -1,4 +1,4 @@
-package com.example.incentivate.ui.notifications;
+package com.example.incentivate.ui.activity;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

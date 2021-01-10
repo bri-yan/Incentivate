@@ -1,9 +1,11 @@
-package com.example.incentivate.ui.notifications;
+package com.example.incentivate.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.incentivate.R;
 
-public class NotificationsFragment extends Fragment {
+public class ExerciseFragment extends Fragment implements View.OnClickListener {
 
     private NotificationsViewModel notificationsViewModel;
 
@@ -22,8 +24,8 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
+        View root = inflater.inflate(R.layout.fragment_exercise, container, false);
+        final TextView textView = root.findViewById(R.id.activities_title);
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -31,5 +33,18 @@ public class NotificationsFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        Button newBlockButton = (Button) getActivity().findViewById(
+                R.id.new_exercise_button);
+        newBlockButton.setOnClickListener((View.OnClickListener) this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getActivity(), ExerciseList.class);
+        startActivity(intent);
     }
 }
