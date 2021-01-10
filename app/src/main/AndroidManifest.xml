@@ -44,13 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <receiver
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-        </receiver>
     </application>
 
 </manifest>
