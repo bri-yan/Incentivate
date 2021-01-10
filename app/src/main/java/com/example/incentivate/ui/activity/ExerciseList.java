@@ -21,7 +21,7 @@ public class ExerciseList extends AppCompatActivity {
     }
 
     public void goWalking(View view){
-            Intent intent = new Intent(this, WalkModule.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(this, WalkModule.class);
+            startActivity(intent);*/
     }
 }
