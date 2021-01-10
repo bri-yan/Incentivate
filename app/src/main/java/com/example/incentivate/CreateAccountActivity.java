@@ -29,7 +29,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        loggedIn = mPreferences.getBoolean("loGGedIN",false);
+        loggedIn = mPreferences.getBoolean("loGGedIn",false);
 
         System.out.println("loggedIn: " + loggedIn);
 
@@ -52,7 +52,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     loggedIn = true;
-                    mEditor.putBoolean("loggedIN", loggedIn);
+                    mEditor.putBoolean("loGGedIn", loggedIn);
                     mEditor.apply();
                     System.out.println("SAVED: " + loggedIn);
 

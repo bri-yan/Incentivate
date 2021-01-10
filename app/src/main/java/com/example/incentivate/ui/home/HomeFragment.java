@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.incentivate.CreateAccountActivity;
 import com.example.incentivate.R;
 
 import org.w3c.dom.Text;
@@ -52,8 +53,10 @@ import androidx.fragment.app.Fragment;
 public class HomeFragment extends Fragment {
 
 
+    private int stepProgressStatus = 0;
+    private TextView mGoalText;
     private HomeViewModel homeViewModel;
-    TextView name;
+    TextView name, status;
     TextView goal;
     BarChart stepChart;
     private ProgressBar stepBar;
@@ -69,35 +72,45 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String userName = mPreferences.getString("name","");
+        String userName = mPreferences.getString(getString(R.string.name),"");
+        System.out.println("Name: " + userName);
         User user = new User(userName);
 
         name = (TextView)root.findViewById(R.id.user_Name);
+        status = root.findViewById(R.id.status);
         goal = root.findViewById(R.id.user_Goal);
+
         name.setText(user.getName());
-       // goal.setText(userGoal.getGoal());
+
+        goal.setText("Goal: 10,000 steps every day for 1 month!");
 
 
         //Progress Bar
 
-        /*
         stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (currentSteps < goalSteps) {
+                while (stepProgressStatus < 10000) {
+                    stepProgressStatus++;
+                    android.os.SystemClock.sleep(1500);
+                    status.setText(String.valueOf(stepProgressStatus));
                     stepHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            stepBar.setProgress(currentSteps);
+                            stepBar.setProgress(stepProgressStatus);
                         }
                     });
                 }
+                stepHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mGoalText.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         }).start();
 
-
-         */
 
 
 
