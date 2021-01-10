@@ -20,4 +20,13 @@
         <item>Calories</item>
         <item>Kilometers</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loggedIn">com.example.incentivate.loggedIn</string>
+    <string name="name">com.example.incentivate.name</string>
+    <string name="email">com.example.incentivate.email</string>
+    <string name="cardNum">com.example.incentivate.cardNum</string>
+    <string name="expDate">com.example.incentivate.expDate</string>
+
 </resources>
