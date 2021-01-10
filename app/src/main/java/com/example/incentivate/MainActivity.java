@@ -1,10 +1,20 @@
 package com.example.incentivate;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.incentivate.ui.PedometerSensorService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -14,7 +24,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener{
+
+/*    private Intent pedometerServiceIntent;
+    private PedometerSensorService pedometerSensorService;*/
+    private TextView stepsToday;
+
+    private SensorManager sensorManager;
+    boolean running = false;
+    private double lastMagnitude;
+    private int totalStepsToday;
+    Sensor stepSensor;
+    private TextView stepDisplay = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         FloatingActionButton button = findViewById(R.id.goToAddGoal);
         button.setOnClickListener(this::launchAddGoalActivity);
+        stepsToday = findViewById(R.id.steps_taken_today);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        //startCounter();
     }
 
     public void launchAddGoalActivity(View v) {
@@ -38,5 +63,45 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        running = true;
+        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if(stepSensor != null){
+            sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI);
+        }else{
+            Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        running = false;
+    }
+
+    private void saveSteps(){
+        SharedPreferences sharedPreferences = getSharedPreferences("incentivate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor spe = sharedPreferences.edit();
+        spe.putInt("StepsToday",totalStepsToday + sharedPreferences.getInt("StepsToday", 0));
+        spe.apply();
+    }
+
+    private void loadSteps(){
+        SharedPreferences sharedPreferences = getSharedPreferences("incentivate", Context.MODE_PRIVATE);
+        totalStepsToday = sharedPreferences.getInt("StepsToday", 0);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(running){
+            stepDisplay.setText(String.valueOf(event.values[0]));
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
