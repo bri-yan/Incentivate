@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E0FBFC"
     tools:context=".AddGoalActivity">
 
     <Button
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:backgroundTint="#3D5A80"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +44,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:text="Add goal"
-        android:textColor="#000000"
+        android:textColor="#293241"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.102"
@@ -50,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDate3"
+        android:id="@+id/dateText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -91,7 +93,7 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTime2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate3" />
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <EditText
         android:id="@+id/editTextTime2"
