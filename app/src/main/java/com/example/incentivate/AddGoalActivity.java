@@ -98,6 +98,7 @@ public class AddGoalActivity extends AppCompatActivity implements AdapterView.On
         String notes = notesText.getText().toString();
 
         Goal goal = new Goal(title, startDate, startTime, endDate, endTime, goalAmount, deposit, notes);
+        //Goal.goals.add(goal);
         System.out.println(Goal.goals.get(0));
     }
 

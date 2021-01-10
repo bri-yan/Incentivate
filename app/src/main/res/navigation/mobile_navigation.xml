@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.incentivate.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_goals"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.incentivate.ui.community.CommunityFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_leaderboard"
         tools:layout="@layout/fragment_community" />
 </navigation>

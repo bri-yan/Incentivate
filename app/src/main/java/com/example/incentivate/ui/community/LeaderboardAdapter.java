@@ -1,5 +1,6 @@
 package com.example.incentivate.ui.community;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             super(itemView);
             itemImage = (ImageView)itemView.findViewById(R.id.community_image);
             itemTitle = (TextView)itemView.findViewById(R.id.community_name);
-            //cardView = itemView.findViewByID(R.id.row_item_card);
+            cardView = (CardView) itemView;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
@@ -78,8 +79,14 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public void onBindViewHolder(LeaderboardAdapter.ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(goals[i]);
-        viewHolder.itemImage.setImageResource(images[i]);
-
+        viewHolder.itemImage.setImageResource(R.drawable.ic_baseline_face_24);
+        if (i==0){
+            viewHolder.cardView.setCardBackgroundColor(Color.parseColor("#D7BE69"));
+        }else if (i==1){
+            viewHolder.cardView.setCardBackgroundColor(Color.parseColor("#D8D8D8"));
+        }else if (i==2){
+            viewHolder.cardView.setCardBackgroundColor(Color.parseColor("#A97142"));
+        }
     }
 
     @Override
