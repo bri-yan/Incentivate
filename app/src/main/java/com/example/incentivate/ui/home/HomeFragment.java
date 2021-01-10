@@ -55,12 +55,13 @@ public class HomeFragment extends Fragment {
 
 
     private int stepProgressStatus = 67;
+    private int stepProgressStatus2 = 83;
     private TextView mGoalText;
     private HomeViewModel homeViewModel;
-    TextView name, status;
+    TextView name, status, status2;
     TextView goal;
     BarChart stepChart;
-    private ProgressBar stepBar;
+    private ProgressBar stepBar, stepBar2;
 
     private Handler stepHandler = new Handler();
 
@@ -79,20 +80,24 @@ public class HomeFragment extends Fragment {
 
         name = (TextView)root.findViewById(R.id.user_Name);
         status = root.findViewById(R.id.status);
+        status2 = root.findViewById(R.id.status3);
         goal = root.findViewById(R.id.user_Goal);
 
         name.setText(user.getName());
 
-        goal.setText("Goal: 10,000 steps every day for 1 month!");
+        goal.setText("Today's Statistics");
 
         stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
+        stepBar2 = (ProgressBar) root.findViewById(R.id.stepProgressBar2);
 
         //Progress Bar
 
         //Constant
         stepBar.setProgress(stepProgressStatus);
+        stepBar2.setProgress(stepProgressStatus2);
 
         status.setText(String.valueOf(stepProgressStatus) + "%");
+        status2.setText(String.valueOf(stepProgressStatus2) + "%");
 
         //Adder
         /*
