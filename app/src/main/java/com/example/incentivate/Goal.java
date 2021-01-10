@@ -23,6 +23,5 @@ public class Goal {
         this.goalAmount = goalAmount;
         this.deposit = deposit;
         this.notes = notes;
-        goals.add(this);
     }
 }

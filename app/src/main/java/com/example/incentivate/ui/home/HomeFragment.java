@@ -44,6 +44,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -53,13 +54,14 @@ import androidx.fragment.app.Fragment;
 public class HomeFragment extends Fragment {
 
 
-    private int stepProgressStatus = 0;
+    private int stepProgressStatus = 67;
+    private int stepProgressStatus2 = 83;
     private TextView mGoalText;
     private HomeViewModel homeViewModel;
-    TextView name, status;
+    TextView name, status, status2;
     TextView goal;
     BarChart stepChart;
-    private ProgressBar stepBar;
+    private ProgressBar stepBar, stepBar2;
 
     private Handler stepHandler = new Handler();
 
@@ -78,16 +80,28 @@ public class HomeFragment extends Fragment {
 
         name = (TextView)root.findViewById(R.id.user_Name);
         status = root.findViewById(R.id.status);
+        status2 = root.findViewById(R.id.status3);
         goal = root.findViewById(R.id.user_Goal);
 
         name.setText(user.getName());
 
-        goal.setText("Goal: 10,000 steps every day for 1 month!");
+        goal.setText("Today's Statistics");
 
+        stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
+        stepBar2 = (ProgressBar) root.findViewById(R.id.stepProgressBar2);
 
         //Progress Bar
 
-        stepBar = (ProgressBar) root.findViewById(R.id.stepProgressBar);
+        //Constant
+        stepBar.setProgress(stepProgressStatus);
+        stepBar2.setProgress(stepProgressStatus2);
+
+        status.setText(String.valueOf(stepProgressStatus) + "%");
+        status2.setText(String.valueOf(stepProgressStatus2) + "%");
+
+        //Adder
+        /*
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -111,11 +125,13 @@ public class HomeFragment extends Fragment {
             }
         }).start();
 
+         */
+
 
         //Bar graph
-        float barWidth = 0.3f;
-        float barSpace = 0.2f;
-        float groupSpace = 0.4f;
+        float barWidth = 0.8f;
+        float barSpace = 0.5f;
+        float groupSpace = 0.1f;
 
         stepChart = (BarChart) root.findViewById(R.id.bargraph);
 
@@ -149,14 +165,16 @@ public class HomeFragment extends Fragment {
         LocalDate day6 = day1.minusDays(5);
         LocalDate day7 = day1.minusDays(6);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE");
+
         ArrayList<String> dates = new ArrayList<>();
-        dates.add(day1.toString());
-        dates.add(day2.toString());
-        dates.add(day3.toString());
-        dates.add(day4.toString());
-        dates.add(day5.toString());
-        dates.add(day6.toString());
-        dates.add(day7.toString());
+        dates.add(day1.format(formatter));
+        dates.add(day2.format(formatter));
+        dates.add(day3.format(formatter));
+        dates.add(day4.format(formatter));
+        dates.add(day5.format(formatter));
+        dates.add(day6.format(formatter));
+        dates.add(day7.format(formatter));
 
         ArrayList<IBarDataSet> stepSets = new ArrayList<>();
         stepSets.add(stepSet);
@@ -167,15 +185,18 @@ public class HomeFragment extends Fragment {
 
         stepChart.setData(stepData);
 
-        /*
+
         stepChart.getBarData().setBarWidth(barWidth);
         stepChart.getXAxis().setAxisMinimum(0);
         stepChart.getXAxis().setAxisMaximum(0 + stepChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
-        stepChart.groupBars(0, groupSpace, barSpace);
+        //stepChart.groupBars(0, groupSpace, barSpace);
         stepChart.getData().setHighlightEnabled(false);
         stepChart.invalidate();
 
-         */
+
+        stepChart.animateY(1000);
+
+
 
 
         //X-axis
@@ -188,9 +209,10 @@ public class HomeFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
 
-        /*
+
         //Y-axis
         stepChart.getAxisRight().setEnabled(false);
+        /*
         YAxis leftAxis = stepChart.getAxisLeft();
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setDrawGridLines(true);
