@@ -44,17 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name="oak.shef.ac.uk.testrunningservicesbackgroundrelaunched.SensorService"
-            android:enabled="true" >
-        </service>
-
-        <receiver
-            android:name="oak.shef.ac.uk.testrunningservicesbackgroundrelaunched.SensorRestarterBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-        </receiver>
     </application>
 
 </manifest>

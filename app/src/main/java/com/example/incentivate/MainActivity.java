@@ -1,13 +1,16 @@
 package com.example.incentivate;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +21,9 @@ import com.example.incentivate.ui.PedometerSensorService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,10 +37,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private SensorManager sensorManager;
     boolean running = false;
-    private double lastMagnitude;
     private int totalStepsToday;
     Sensor stepSensor;
-    private TextView stepDisplay = null;
+    private TextView stepToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +52,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         NavigationUI.setupWithNavController(navView, navController);
         FloatingActionButton button = findViewById(R.id.goToAddGoal);
         button.setOnClickListener(this::launchAddGoalActivity);
-        stepsToday = findViewById(R.id.steps_taken_today);
 
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepToday = findViewById(R.id.steps_taken_today);
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        stepToday.setText("6");
         //startCounter();
     }
 
@@ -91,8 +97,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        Log.d("Steps","I'm happy");
         if(running){
-            stepDisplay.setText(String.valueOf(event.values[0]));
+            stepToday.setText(String.valueOf(event.values[0]));
         }
     }
 
