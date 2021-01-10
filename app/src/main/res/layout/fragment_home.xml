@@ -64,12 +64,12 @@
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="113dp"
-        android:layout_height="53dp"
+        android:layout_width="147dp"
+        android:layout_height="55dp"
+        android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/bargraph"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stepProgressBar"
         app:layout_constraintVertical_bias="0.0" />

@@ -112,9 +112,6 @@ public class HomeFragment extends Fragment {
         }).start();
 
 
-
-
-/*
         //Bar graph
         float barWidth = 0.3f;
         float barSpace = 0.2f;
@@ -133,17 +130,13 @@ public class HomeFragment extends Fragment {
 
         ArrayList<BarEntry> stepEntries = new ArrayList<>();
 
-        stepEntries.add(new BarEntry(1,(float)  ));
-        stepEntries.add(new BarEntry(2,(float)  ));
-        stepEntries.add(new BarEntry(3,(float)  ));
-        stepEntries.add(new BarEntry(4,(float)  ));
-        stepEntries.add(new BarEntry(5,(float)  ));
-        stepEntries.add(new BarEntry(6,(float)  ));
-        stepEntries.add(new BarEntry(7,(float)  ));
-
-
-
-
+        stepEntries.add(new BarEntry(1,(float)8135));
+        stepEntries.add(new BarEntry(2,(float)3423));
+        stepEntries.add(new BarEntry(3,(float)9123));
+        stepEntries.add(new BarEntry(4,(float)2647));
+        stepEntries.add(new BarEntry(5,(float)2374));
+        stepEntries.add(new BarEntry(6,(float)3647));
+        stepEntries.add(new BarEntry(7,(float)1245));
 
 
         BarDataSet stepSet= new BarDataSet(stepEntries, "Dates");
@@ -155,6 +148,7 @@ public class HomeFragment extends Fragment {
         LocalDate day5 = day1.minusDays(4);
         LocalDate day6 = day1.minusDays(5);
         LocalDate day7 = day1.minusDays(6);
+
         ArrayList<String> dates = new ArrayList<>();
         dates.add(day1.toString());
         dates.add(day2.toString());
@@ -168,16 +162,21 @@ public class HomeFragment extends Fragment {
         stepSets.add(stepSet);
 
         BarData stepData = new BarData(stepSets);
+
         stepData.setValueFormatter(new LargeValueFormatter());
 
         stepChart.setData(stepData);
-        stepChart.getBarData().setBarWidth(barWidth);
+
+        /*
         stepChart.getBarData().setBarWidth(barWidth);
         stepChart.getXAxis().setAxisMinimum(0);
         stepChart.getXAxis().setAxisMaximum(0 + stepChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
         stepChart.groupBars(0, groupSpace, barSpace);
         stepChart.getData().setHighlightEnabled(false);
         stepChart.invalidate();
+
+         */
+
 
         //X-axis
         XAxis xAxis = stepChart.getXAxis();
@@ -188,6 +187,8 @@ public class HomeFragment extends Fragment {
         xAxis.setAxisMaximum(6);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
+
+        /*
         //Y-axis
         stepChart.getAxisRight().setEnabled(false);
         YAxis leftAxis = stepChart.getAxisLeft();
@@ -196,7 +197,11 @@ public class HomeFragment extends Fragment {
         leftAxis.setSpaceTop(35f);
         leftAxis.setAxisMinimum(0f);
 
- */
+         */
+
+
+
+
 
         return root;
     }
