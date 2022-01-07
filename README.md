@@ -19,7 +19,7 @@ We have designed an Android fitness App called Incentivate. The premise of our a
 2) [`Gradle`](https://gradle.org/install/) must also be install on your device to install other packages.
 3) [`Android Studio`](https://developer.android.com/studio?gclid=Cj0KCQiAw9qOBhC-ARIsAG-rdn4-htjsLqgaXd6EQ5gu3EbhXF43hMPNWXZhxJRfYtXiz8XCLVxx_Z4aAkmqEALw_wcB&gclsrc=aw.ds) is needed to build and run the code.
 
-Then, use Git to clone this respository in Android Studio and run the code.
+Then, use Git to clone this respository in Android Studio and run the code. Make sure to install the required dependencies when prompted using Gradle.
 [`Here`](https://developer.android.com/training/basics/firstapp/running-app) are some instructions to run the code using an emulator, or your own Android Device.
 
 ## App Walkthrough
